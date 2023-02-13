@@ -22,7 +22,7 @@ public class ClearCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(Object[] args) {
         collection.clear();
     }
 }

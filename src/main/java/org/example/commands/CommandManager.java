@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CommandManager {
     List<Command> commandMap = new ArrayList<>();
@@ -12,17 +13,11 @@ public class CommandManager {
         commandMap.add(command);
     }
 
-    public void execute(String commandName) {
-        byte count = 0;
-        for (Command command: commandMap) {
-            if (command.getName().equals(commandName)) {
-                command.execute();
-                count++;
-                break;
-            }
-        }
-        if (count == 0) {
-            System.out.println("Такой комманды нет");
+    public void execute(String commandName,Object[] args)  {
+        AtomicBoolean executed = new AtomicBoolean(false);
+        commandMap.stream().filter(a -> a.getName().equals(commandName)).findAny().ifPresent(a -> {a.execute(args); executed.set(true);});
+        if (!executed.get()) {
+            System.out.println("Такой команды нет");
         }
     }
 }

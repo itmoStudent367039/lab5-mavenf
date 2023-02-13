@@ -7,8 +7,8 @@ import java.util.Queue;
 
 public class MyCollection {
     private Queue<Product> collection = new PriorityQueue<Product>();
-    public void addElement() {
-
+    public void addElement(Product product) {
+        collection.add(product);
     }
     public void clear() {
         collection.clear();

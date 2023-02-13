@@ -1,6 +1,7 @@
 package org.example.commands;
 
 import org.example.collection.MyCollection;
+import org.example.objects.Product;
 
 public class AddCommand implements Command {
     private String name;
@@ -22,7 +23,7 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        collection.addElement();
+    public void execute(Object[] args) {
+        collection.addElement((Product) args[0]);
     }
 }
